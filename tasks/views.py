@@ -19,3 +19,6 @@ def show_specific_task(request,id):
     print("id:", id)
     print("id_type:", type(id))
     return HttpResponse("This is spacific task")
+
+def dash(request):
+    return HttpResponse("dash board")
