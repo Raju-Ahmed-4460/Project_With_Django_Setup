@@ -1,0 +1,33 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static "css/output.css" %}">
+</head>
+<body>
+
+    {% comment %} get request holo jokhon search dila ki ki likhase sheta dhaka jabe {% endcomment %}
+
+     {% comment %} post request dila data dhaka jabe na tai privete datar
+       khetra post request babohar hoi ar ata use korar janno csrf token use korte hoi {% endcomment %}
+    <div class="w-1/2 mx-auto mt-8">
+
+             <div>
+        {% if message %}
+        <p>{{message}}</p>
+        {% endif %}
+    </div>
+    <form method="POST">
+        {% csrf_token %} 
+        {{myform.as_p}}
+        <button type="submit" class="bg-rose-500 px-4 py-3 text-white">submit</button>
+        
+    </form>
+
+    </div>
+  
+</body>
+</html>

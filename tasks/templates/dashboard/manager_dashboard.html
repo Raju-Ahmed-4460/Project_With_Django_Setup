@@ -1,0 +1,91 @@
+
+
+
+
+{% extends "dashboard/dashboard.html" %}
+{% block title %}Manager Dashboard{% endblock title %}
+
+{% block tasks %}
+
+<div class="bg-white rounded-xl shadow-sm  mb-8 ">
+                
+                
+                <div class="bg-white rounded-xl shadow-sm  mb-8 p-6">
+            <div class="grid grid-cols-4 p-4 border-b border-gray-100 test-sm text-gray-500">
+                <div>TASK TITLE</div>
+                <div>PRIORITY</div>
+                <div>TEAM</div>
+                <div>CREATED AT</div>
+            </div>
+         
+
+                   {% comment %} task-items  {% endcomment %}
+                   <div class="divide-y divide-gray-300 p-6 border border-gray-100">
+                     <div class="grid grid-cols-4 gap-4 items-center border-gray-400">
+                <div class="flex items-center gap-2">
+                <div class="h-2 w-2 bg-yellow-500 rounded-full"></div>
+                <div><span>TEST LOW TASK</span></div>
+            </div> 
+            <div><span  class="py-1 px-3 rounded-full bg-green-200 text-sm ">low</span></div>
+            <div>
+                <div class="flex -space-x-2">
+                    <div class="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-sm border-3 border-black">fa</div>
+                     <div class="w-8 h-8 rounded-full bg-yellow-500 flex items-center justify-center text-sm border-3 border-black">fa</div>
+                      <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-sm border-3 border-black">fa</div>
+
+                </div>
+            </div>
+            <div><span class="text-gray-400">9 month ago</span></div>
+                   </div>
+                      </div>
+
+
+
+
+                       <div class="divide-y divide-gray-300 p-6 border border-gray-100">
+                     <div class="grid grid-cols-4 gap-4 items-center">
+                <div class="flex items-center gap-2">
+                <div class="h-2 w-2 bg-blue-500 rounded-full"></div>
+                <div><span>TEST LOW TASK</span></div>
+            </div> 
+            <div><span  class="py-1 px-3 rounded-full bg-yellow-200 text-sm ">Normal</span></div>
+            <div>
+                <div class="flex -space-x-2">
+                    <div class="w-8 h-8 rounded-full bg-yellow-500 flex items-center justify-center text-sm border-3 border-black">fa</div>
+                     <div class="w-8 h-8 rounded-full bg-gray-500 flex items-center justify-center text-sm border-3 border-black">fa</div>
+                      <div class="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-sm border-3 border-black">fa</div>
+
+                </div>
+            </div>
+            <div><span class="text-gray-400">9 month ago</span></div>
+                   </div>
+                      </div>
+
+
+
+
+                       <div class="divide-y divide-gray-300 p-6 border border-gray-100">
+                     <div class="grid grid-cols-4 gap-4 items-center">
+                <div class="flex items-center gap-2">
+                <div class="h-2 w-2 bg-green-500 rounded-full"></div>
+                <div ><span>TEST LOW TASK</span></div>
+            </div> 
+            <div><span  class="py-1 px-3 rounded-full bg-red-200 text-sm  ">High</span></div>
+            <div>
+                <div class="flex -space-x-2 ">
+                    <div class="w-8 h-8 rounded-full bg-gray-500 flex items-center justify-center text-sm border-3 border-black">fa</div>
+                     <div class="w-8 h-8 rounded-full bg-orange-500 flex items-center justify-center text-sm border-3 border-black">fa</div>
+                      <div class="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center text-sm border-3 border-black">fa</div>
+ <div class="w-8 h-8 rounded-full bg-yellow-500 flex items-center justify-center text-sm border-3 border-black">fa</div>
+                </div>
+            </div>
+            <div><span class="text-gray-400">9 month ago</span></div>
+                   </div>
+                      </div>
+            
+        
+            
+    
+         
+        </div>
+            {% endblock tasks %}
