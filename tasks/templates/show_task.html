@@ -7,7 +7,7 @@
 </head>
 <body>
 
-    <div>
+    {% comment %} <div>
        <ul>
         {% for k  in key %}
         <li>{{k.status}}</li>
@@ -20,7 +20,73 @@
     </div>
     <div>
         {{first_task}}
+    </div> {% endcomment %}
+
+    {% comment %} <div>
+
+        <ul>
+            {% for task in task %}
+            <li>
+                <p>{{task.title}}</p>
+                <span>{{task.status}}</span>
+            </li>
+            
+            {% endfor %}
+
+        </ul>
+        
+    </div> {% endcomment %}
+
+    {% comment %} <div>
+
+        <ul>
+            {% for task in task %}
+            <li>
+                <p>{{task.title}}</p>
+                <span>{{task.status}}</span>
+            </li>
+            
+            {% endfor %}
+
+        </ul>
+        
+    </div> {% endcomment %}
+{% comment %} 
+
+    <div>
+        {{task}}
+    </div> {% endcomment %}
+
+    {% comment %} <div>
+        <ul>
+            {% for tasks in tasks  %}
+               <li>
+                <p>{{tasks.title}}</p>
+                <span>{{tasks.datils.priority}}</span>
+               </li>
+            {% endfor %}
+        </ul>
+    </div> {% endcomment %}
+
+     {% comment %} <div>
+        <ul>
+            {% for tasks in tasks  %}
+               <li>
+                <p>{{tasks.name}}</p>
+                {% for task in tasks.task_set.all %}
+                  <p>{{task.title}}</p>
+                
+                {% endfor %}
+              
+               </li>
+            {% endfor %}
+        </ul>
+    </div> {% endcomment %}
+
+    <div>
+        <p>{{ task_count}}</p>
     </div>
+    
     
 </body>
 </html>
