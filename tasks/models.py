@@ -65,7 +65,7 @@ class TaskDetail(models.Model):
     # std_id=models.CharField(max_length=200,primary_key=True)  ata korle auto primary key tar poriborte ata primary key hobe
     task=models.OneToOneField(Task,on_delete=models.CASCADE,related_name="datils")
    
-    assign_to=models.TextField(max_length=100)
+    # assign_to=models.TextField(max_length=100)
     priority=models.CharField(max_length=1,choices=PRIORITY_OPTION, default=low)
     notes=models.TextField(blank=True,null=True)
 
