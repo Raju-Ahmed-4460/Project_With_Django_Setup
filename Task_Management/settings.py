@@ -24,10 +24,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-q4ihn^!5063w@ip+9hhh*lwczz#iy!az5c5_#q&dmj(fn$_$8c"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS=['https://*.onrender.com','http://127.0.0.1:8000/tasks/manager_dashboard/']
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.onrender.com',
+    'http://127.0.0.1:8000',
+]
 
 
 # Application definition
