@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Welcome to User Authentication System</h1>
+
+     <div>
+            {% if messages %}
+
+            {% for message  in messages %}
+            <div class="px-2 py-1 {% if message.tags == 'error' %}bg-red-500{% endif %}">{{message}}</div>
+            
+            {% endfor %}
+            
+            {% endif %}
+        </div>
+
+    <div>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <input type="text" placeholder="Enter Your Username" name="username">
+            <input type="password" placeholder="Enter Your password" name="password">
+
+            <button>Login</button>
+        </form>
+    </div>
+</body>
+</html>

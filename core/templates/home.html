@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Wellcome Home</h1>
+
+   {% if user.is_authenticated %}
+
+    <p>Welcome, {{ user.username }}</p>
+
+    <form action="{% url 'logout' %}" method="POST">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+    </form>
+
+{% else %}
+
+    <p>Anonymous User</p>
+
+    <a href="{% url 'login' %}">Login</a>
+
+{% endif %}
+
+
+
+
+</body>
+</html>
