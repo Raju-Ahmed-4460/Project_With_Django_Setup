@@ -1,4 +1,7 @@
 from django.db import models
+from django.db.models.signals import pre_save,post_save,m2m_changed,post_delete
+from django.dispatch import receiver
+from django.core.mail import send_mail
 
 # Create your models here.
 
@@ -89,4 +92,38 @@ class Project(models.Model):
     start_data=models.DateField()
     def __str__(self):
         return  self.name
+
+
+
+
+@receiver(m2m_changed, sender=Task.assigned_to.through)
+def notify_Employee_task_creation(sender, instance, action, **kwargs):
+    
+    if action == "post_add":   
+
+        assign_email = [emp.email for emp in instance.assigned_to.all()]
+
+        send_mail(
+            "New Task assign",
+            f"You have been assigned to this Task: {instance.title}",
+            "rajur20m@gmail.com",
+            assign_email,
+        )
+
+
+# @receiver(post_delete,sender=Task)
+
+# def Deleteing_Notification(sender,instance,**kwargs):
+#     if instance.datils:
+#         print(instance)
+#         instance.datils.delete()
+#         print("deleted Sucessfully")
+
+
+@receiver(post_delete, sender=Task)
+def deleting_notification(sender, instance, **kwargs):
+    print(f"Task '{instance.title}' deleted successfully")
+
+
+   
 
