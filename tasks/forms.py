@@ -16,39 +16,46 @@ class TaskForm(forms.Form):
 
 
 
+
+
 class StyleFormMixin:
-    defualt_class="display:block; width:100%; border:1px solid #ccc; padding:8px; border-radius:6px; margin-top:5px;"
+    default_class = "display:block; width:100%; border:1px solid #ccc; padding:8px; border-radius:6px; margin-top:5px;"
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.apply_style_widget()
 
-    def apply_style_widge(self):
+    def apply_style_widget(self):
         for field_name, field in self.fields.items():
-            if isinstance(field.widget,forms.TextInput):
+
+            # Text input
+            if isinstance(field.widget, forms.TextInput):
                 field.widget.attrs.update({
                     'class': 'form-control',
-                    'style':self.defualt_class,
+                    'style': self.default_class,
                     'placeholder': f"Enter {field.label.lower()}",
                 })
 
-            elif isinstance(field.widget,forms.Textarea):
+            # Textarea
+            elif isinstance(field.widget, forms.Textarea):
                 field.widget.attrs.update({
                     'class': 'form-control',
-                    'style':self.defualt_class,
+                    'style': self.default_class,
                     'placeholder': f"Enter {field.label.lower()}",
-                    
-
                 })
 
-            elif isinstance(field.widget,forms.SelectDateWidget):
+            # Select (IMPORTANT FIX)
+            elif isinstance(field.widget, forms.Select):
                 field.widget.attrs.update({
-                     'style': 'display:inline; margin-top:5px;border:1px solid #ccc;'
-
+                    'class': 'form-control',
+                    'style': self.default_class,
                 })
-            elif isinstance(field.widget,forms.CheckboxSelectMultiple):
+
+            # Checkbox multiple
+            elif isinstance(field.widget, forms.CheckboxSelectMultiple):
                 field.widget.attrs.update({
-                    'style': 'display:inline; margin-top:5px;border:1px solid #ccc'
-
+                    'style': 'margin-top:5px;'
                 })
-
 
 
 
