@@ -1,7 +1,7 @@
 from django.db.models.signals import post_save,post_delete,pre_save,m2m_changed
 from django.dispatch import receiver
 from django.core.mail import send_mail
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User,Group
 from django.contrib.auth.tokens import default_token_generator
 from django.conf import settings
 from django.core.mail import send_mail
@@ -23,4 +23,14 @@ def Send_activation_Mail(sender,instance,created,**kwargs):
 
         except Exception as e:
             print(f'faild to login{instance.email}{str(e)}')
+
+
+@receiver(post_save,sender=User)
+
+def assign_group(sender,created,instance,**kwargs):
+    if created:
+        user_grup,created=Group.objects.get_or_create(name='User')
+        instance.groups.add(user_grup)
+        instance.save()
+
 

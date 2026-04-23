@@ -1,7 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from users.forms import RegisterForm,CustomRegistrationForm,CustomLoginForm
+from users.forms import RegisterForm,CustomRegistrationForm,CustomLoginForm,AssignRoleForm
 from django.contrib import messages
 from django.contrib.auth import login,authenticate,logout
 from django.http import HttpResponse
@@ -63,6 +63,30 @@ def Activate_user(request, user_id, token):
             return HttpResponse("invalid id or token")
     except User.DoesNotExist:
         return HttpResponse("user not Found")
+    
+
+def Admin_dashboard(request):
+    users=User.objects.all()
+    return render(request,'admin/dashboard.html',{'users':users})
+
+
+def assign_role(request,user_id):
+    form=AssignRoleForm()
+    user=User.objects.get(id=user_id)
+
+    if request.method=="POST":
+        form=AssignRoleForm(request.POST)
+        if form.is_valid():
+            role=form.cleaned_data.get('role')
+            user.groups.clear()
+            user.groups.add(role)
+            messages.success(request,f"role added for {user.username} to {role.name}")
+            return redirect('admin_dashboard')
+    
+
+    return render(request,"admin/assignrole.html",{'form':form})
+
+
 
 
 
