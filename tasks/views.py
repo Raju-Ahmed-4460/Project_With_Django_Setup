@@ -12,10 +12,10 @@ from django.contrib.auth.decorators import login_required, permission_required,u
 # user passes test  she or he is manager
 
 def is_manager(user):
-    return  user.groups.filter(name='manager').exists()
+    return user.is_superuser or user.groups.filter(name='manager').exists()
 
 def is_employee(user):
-    return  user.groups.filter(name='Employee').exists()
+    return  user.is_superuser or user.groups.filter(name='Employee').exists()
 
 
 @user_passes_test(is_manager,login_url="no_permission")
