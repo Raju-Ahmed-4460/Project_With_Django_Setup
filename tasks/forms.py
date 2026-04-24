@@ -18,6 +18,8 @@ class TaskForm(forms.Form):
 
 
 
+from django import forms
+
 class StyleFormMixin:
     default_class = "display:block; width:100%; border:1px solid #ccc; padding:8px; border-radius:6px; margin-top:5px;"
 
@@ -28,7 +30,6 @@ class StyleFormMixin:
     def apply_style_widget(self):
         for field_name, field in self.fields.items():
 
-            # Text input
             if isinstance(field.widget, forms.TextInput):
                 field.widget.attrs.update({
                     'class': 'form-control',
@@ -36,7 +37,6 @@ class StyleFormMixin:
                     'placeholder': f"Enter {field.label.lower()}",
                 })
 
-            # Textarea
             elif isinstance(field.widget, forms.Textarea):
                 field.widget.attrs.update({
                     'class': 'form-control',
@@ -44,19 +44,22 @@ class StyleFormMixin:
                     'placeholder': f"Enter {field.label.lower()}",
                 })
 
-            # Select (IMPORTANT FIX)
             elif isinstance(field.widget, forms.Select):
                 field.widget.attrs.update({
                     'class': 'form-control',
                     'style': self.default_class,
                 })
 
-            # Checkbox multiple
-            elif isinstance(field.widget, forms.CheckboxSelectMultiple):
+            elif isinstance(field.widget, forms.SelectMultiple):
                 field.widget.attrs.update({
-                    'style': 'margin-top:5px;'
+                    'class': 'form-control',
+                    'style': self.default_class,
                 })
 
+            elif isinstance(field.widget, forms.CheckboxSelectMultiple):
+                field.widget.attrs.update({
+                    'style': 'margin-top:5px;',
+                })
 
 
 ## Django model form:
@@ -97,7 +100,7 @@ class TaskModelForm(StyleFormMixin,forms.ModelForm):
     '''Using mixin widget'''
     def __init__(self,*arg,**kwarg):
         super().__init__(*arg,**kwarg)
-        self.apply_style_widge()
+        self.apply_style_widget()
 
 class TaskDetailModelform(StyleFormMixin,forms.ModelForm):
     class Meta:
@@ -105,6 +108,6 @@ class TaskDetailModelform(StyleFormMixin,forms.ModelForm):
         fields=['priority','notes']
     def __init__(self,*arg,**kwarg):
         super().__init__(*arg,**kwarg)
-        self.apply_style_widge()
+        self.apply_style_widget()
 
     

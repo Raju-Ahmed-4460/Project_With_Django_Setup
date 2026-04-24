@@ -5,8 +5,20 @@ from tasks.models import Employee,Task,TaskDetail,Project
 from datetime import date
 from django.db.models import Q,Max,Min,Count,Avg
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required, permission_required,user_passes_test
 
 # Create your views here.
+
+# user passes test  she or he is manager
+
+def is_manager(user):
+    return  user.groups.filter(name='manager').exists()
+
+def is_employee(user):
+    return  user.groups.filter(name='Employee').exists()
+
+
+@user_passes_test(is_manager,login_url="no_permission")
 def manager_dashboard(request):
     type = request.GET.get('type','all')
     
@@ -42,7 +54,9 @@ def manager_dashboard(request):
     }
     return render(request, "dashboard/manager_dashboard.html",contex)
 
-def user_dashboard(request):
+
+@user_passes_test(is_employee,login_url="no_permission")
+def employee_dashboard(request):
     return render(request, "dashboard/user_dashboard.html")
 
 
@@ -61,7 +75,8 @@ def test(request):
 
 
 ## all are query in python format like databse sql query
-
+@login_required
+@permission_required('tasks.add_task',login_url="no_permission")
 def create_form(request):
     # em = employee.objects.all()
     task_form =  TaskModelForm() ## for get request
@@ -99,7 +114,8 @@ def create_form(request):
     context = {"task_form": task_form,"task_detail_form":task_detail_form}
     return render(request, "task_form.html", context)
 
-
+@login_required
+@permission_required('tasks.change_task',login_url="no_permission")
 def update_form(request,id):
     # em = employee.objects.all()
     task=Task.objects.get(id=id)
@@ -123,7 +139,8 @@ def update_form(request,id):
 
 
 
-
+@login_required
+@permission_required('tasks.delete_task',login_url="no_permission")
 def delete_task(request,id):
     if request.method == "POST":
         task=Task.objects.get(id=id)
@@ -140,7 +157,8 @@ def delete_task(request,id):
     
 
 ## See all Task
-
+@login_required
+@permission_required('tasks.view_task',login_url="no_permission")
 def view_task(request):
     # ## give me all data from task model
     # tasks=Task.objects.all()
