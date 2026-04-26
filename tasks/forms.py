@@ -16,10 +16,6 @@ class TaskForm(forms.Form):
 
 
 
-
-
-from django import forms
-
 class StyleFormMixin:
     default_class = "display:block; width:100%; border:1px solid #ccc; padding:8px; border-radius:6px; margin-top:5px;"
 

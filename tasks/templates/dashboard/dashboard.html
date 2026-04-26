@@ -1,46 +1,11 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{% endblock title %}</title>
-   
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
-<link rel="stylesheet" href="{% static "css/output.css" %}">
-<style>
-    body{
-        font-family: "Inter",sans-serif;
-    }
-</style>
 
 
-</head>
+{% extends "base.html" %}
+{% block content %}
 
-<body class=" p-6 bg-gray-100 ">
-     {% comment %} header {% endcomment %}
-  
-      <header class=" bg-blue-300 mb-8 flex w-full justify-between items-center px-96 py-4 rounded-xl ">
-        <h1 class="text-2xl font-semibold">Dashboard</h1>
-        <div class=" flex justify-center item-ceter space-x-4">
-            <button class=" w-10 h-10 flex items-center text-2xl justify-center rounded-full hover:bg-red-300 ">B</button>
-            <button class="w-10 h-10 flex items-center justify-center text-2xl  rounded-full bg-yellow-300 "><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
-                    stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round"
-                        d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
-                </svg>
-            </button>
-        </div>
-    </header>
 
-    
-     <main>
          {% comment %} stas grid  {% endcomment %}
-         <div class="grid grid-cols-1 md:grid-cols-4 sm:grid-cols-1 gap-6 mb-8 items-start">
+         <div class="grid grid-cols-1 md:grid-cols-4 sm:grid-cols-1 gap-6 my-8 items-start">
             {% comment %} total task {% endcomment %}
 
             <a href="{% url 'manager_dashboard' %}">
@@ -140,11 +105,6 @@
           
           {% endblock tasks %}
 
-     </main>
 
+          {% endblock content %}
 
- {% include "footer.html" %}
-
-</body>
-
-</html>

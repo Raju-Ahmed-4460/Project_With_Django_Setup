@@ -1,15 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div>
-        <h1>Welcome to User Authentication System</h1>
+{% extends "base.html" %}
 
-     <div>
+{% block content %}
+
+     <div class="mx-auto w-1/2 my-9">
             {% if messages %}
 
             {% for message  in messages %}
@@ -18,17 +11,14 @@
             {% endfor %}
             
             {% endif %}
-        </div>
-
-    <div>
+      
         <form action="" method="POST">
             {% csrf_token %}
             {{form}}
-            <button>Login</button>
+            <button class="px-2 py-1 bg-amber-400">Login</button>
         </form>
     </div>
 
-    </div>
-    
-</body>
-</html>
+    {% endblock content %}
+
+  

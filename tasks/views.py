@@ -223,6 +223,14 @@ def view_task(request):
 
 
 
+@login_required
+@permission_required('tasks.view_task',login_url="no_permission")
+def tasks_details(request,task_id):
+    task=Task.objects.get(id=task_id)
+
+    return render(request,"task_details.html",{'task':task})
+
+
     
 
 

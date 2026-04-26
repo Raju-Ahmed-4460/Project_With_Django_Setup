@@ -1,13 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>...Wellcome to Authentication System...</h1>
 
+
+
+{% extends "base.html" %}
+
+{% block content %}
+
+<div  class="mx-auto w-1/2 mt-9 mb-9">
 {% if messages %}
 
 {% for message in messages %}
@@ -48,8 +46,9 @@
         </p>
     {% endfor %}
 
-    <button type="submit">Sign Up</button>
+    <button type="submit" class="bg-green-500 px-2 py-1">Sign Up</button>
 </form>
     </div>
-</body>
-</html>
+
+    </div>
+{% endblock content %}
