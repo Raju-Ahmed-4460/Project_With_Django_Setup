@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -27,7 +28,11 @@ class Task(models.Model):
                               default=1)
     ## ata korar por automatically akta set tori hoi tasktatiles_setS
     ## many to many
-    assigned_to=models.ManyToManyField(Employee,related_name="task")
+
+
+    # assigned_to=models.ManyToManyField(Employee,related_name="task")
+
+    assigned_to=models.ManyToManyField(User,related_name="task")
 
 
     title=models.CharField( max_length=150)
@@ -63,6 +68,8 @@ class TaskDetail(models.Model):
 
     ### one to one relationship
     # std_id=models.CharField(max_length=200,primary_key=True)  ata korle auto primary key tar poriborte ata primary key hobe
+
+    asset_image=models.ImageField(upload_to='task_asset',blank=True,null=True)
     task=models.OneToOneField(Task,on_delete=models.CASCADE,related_name="datils")
    
     # assign_to=models.TextField(max_length=100)

@@ -84,7 +84,7 @@ def create_form(request):
 
     if request.method == "POST":
         task_form =  TaskModelForm(request.POST) ## for get request
-        task_detail_form=TaskDetailModelform(request.POST)
+        task_detail_form=TaskDetailModelform(request.POST,request.FILES)
         if task_form.is_valid() and task_detail_form.is_valid():
             '''for modelform data'''
             task=task_form.save()

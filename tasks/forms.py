@@ -62,7 +62,7 @@ class StyleFormMixin:
 class TaskModelForm(StyleFormMixin,forms.ModelForm):
     class Meta:
         model=Task
-        fields=['title','description','due_data','assigned_to']
+        fields=['title','description','due_data','assigned_to'] 
         widgets={
         'due_data':forms.SelectDateWidget,
         'assigned_to':forms.CheckboxSelectMultiple
@@ -101,7 +101,7 @@ class TaskModelForm(StyleFormMixin,forms.ModelForm):
 class TaskDetailModelform(StyleFormMixin,forms.ModelForm):
     class Meta:
         model=TaskDetail
-        fields=['priority','notes']
+        fields=['priority','notes','asset_image']
     def __init__(self,*arg,**kwarg):
         super().__init__(*arg,**kwarg)
         self.apply_style_widget()
