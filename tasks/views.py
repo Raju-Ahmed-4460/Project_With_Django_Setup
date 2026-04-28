@@ -6,16 +6,17 @@ from datetime import date
 from django.db.models import Q,Max,Min,Count,Avg
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required,user_passes_test
+from users.views import is_admin
 
 # Create your views here.
 
 # user passes test  she or he is manager
 
 def is_manager(user):
-    return user.is_superuser or user.groups.filter(name='manager').exists()
+    return  user.groups.filter(name='manager').exists()
 
 def is_employee(user):
-    return  user.is_superuser or user.groups.filter(name='Employee').exists()
+    return  user.groups.filter(name='Employee').exists()
 
 
 @user_passes_test(is_manager,login_url="no_permission")
@@ -160,60 +161,6 @@ def delete_task(request,id):
 @login_required
 @permission_required('tasks.view_task',login_url="no_permission")
 def view_task(request):
-    # ## give me all data from task model
-    # tasks=Task.objects.all()
-
-    # ## for the specific task
-
-    # task2=Task.objects.get(id=2) ## get sudhu matro akata data niya kaj kora akadik data thakle error diba
-
-    # ## for the first task
-    # first_task=Task.objects.first
-    # return render(request,"show_task.html",{'key':tasks,'task2':task2,'first_task':first_task})
-    # '''pending task'''
-    # task=Task.objects.filter(status="PENDING")
-
-    # """tody task """
-    # tody_task=Task.objects.filter(due_data=date.today())
-
-    # '''show the task whos priority is not low'''
-    # task_hm=TaskDetail.objects.exclude(priority="L")
-    # '''show the task whos priority is not high'''
-    # task_hm=TaskDetail.objects.exclude(priority="H")
-
-
-    '''sshow the the task that contain paper and status pending'''
-    # task=Task.objects.filter(title__icontains="c" , status="PENDING")
-
-    '''show the task where the status is pending or in progress'''
-
-    # task=Task.objects.filter(Q(status="PENDING") | Q(status="IN_PROGRESSS"))
-
-    '''kono data exists kora ki na'''
-
-    # tasks=Task.objects.filter(status="PENDING").exists()
-
-
-    """For One To One Ar JOIN THIS Is Two Way"""
-    '''select related field(foregin key , one to one field)  join like query'''
-    '''ata task theke datils ar access'''
-    # tasks=Task.objects.select_related("datils").all()
-
-    ''' akhon taskdatils thehe task ar access join query'''
-
-    # tasks=TaskDetail.objects.select_related("task").all()
-
-
-
-    """For Foregein key Join THIS IS one way"""
-    '''Jamon amai task thehe project ke pabo but project thehe task ke bosate parbo na'''
-
-    # tasks=Task.objects.select_related("project").all()
-
-    """Prefetsch_relateted (many to mant and reverse foregein key)"""
-    # tasks=Project.objects.prefetch_related('task_set').all()
-
-    '''agrigation function'''
     task_count=Task.objects.aggregate(num_task=Count('id'))
 
     return render(request,"show_task.html",{'task_count': task_count})
@@ -227,8 +174,32 @@ def view_task(request):
 @permission_required('tasks.view_task',login_url="no_permission")
 def tasks_details(request,task_id):
     task=Task.objects.get(id=task_id)
+    status_choices=Task.STATUS_CHOISES
 
-    return render(request,"task_details.html",{'task':task})
+    if request.method=="POST":
+        select_status=request.POST.get('task_status')
+        task.status=select_status
+        task.save()
+        return redirect('task_details',task.id)
+
+    return render(request,"task_details.html",{'task':task,'status_choices':status_choices})
+
+
+
+@login_required
+def dashboard(request):
+    if is_manager(request.user):
+        return redirect('manager_dashboard')
+    elif is_employee(request.user):
+        return redirect('user_dashboard')
+    elif is_admin(request.user):
+        return redirect('admin_dashboard')
+    else:
+        return redirect('no_permission')
+
+
+
+
 
 
     

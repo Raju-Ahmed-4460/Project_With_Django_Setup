@@ -19,7 +19,8 @@ class Task(models.Model):
     STATUS_CHOISES=[
         ('PENDING','Pending'),
         ('IN_PROGRESS','In Progress'),
-        ('COMPLETED','Completed')
+        ('COMPLETED','Completed'),
+        ('new','New')
     ]
 
     ### many to one relationship
