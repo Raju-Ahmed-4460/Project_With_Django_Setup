@@ -15,7 +15,7 @@ from django.db.models import Prefetch
 
 # test user or admin
 def is_admin(user):
-    return user.groups.filter(name='Admin').exists()
+    return user.is_superuser or user.groups.filter(name="Admin").exists()
 
 
 

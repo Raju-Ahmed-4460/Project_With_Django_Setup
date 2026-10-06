@@ -1,92 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>All Tasks</title>
 </head>
+
 <body>
 
-    {% comment %} <div>
-       <ul>
-        {% for k  in key %}
-        <li>{{k.status}}</li>
-        
-        {% endfor %}
-       </ul>
+    <div>
+        <h1>All Tasks</h1>
+
+        <p>Total Tasks: {{ task_count }}</p>
+
+        <ul>
+
+            {% for task in tasks %}
+
+                <li>
+                    <p>Title: {{ task.title }}</p>
+                    <p>Status: {{ task.status }}</p>
+
+                    {% if task.datils %}
+                        <p>Priority: {{ task.datils.priority }}</p>
+                    {% endif %}
+                </li>
+
+            {% empty %}
+
+                <li>No tasks found.</li>
+
+            {% endfor %}
+
+        </ul>
+
     </div>
-    <div>
-        {{task2}}
-    </div>
-    <div>
-        {{first_task}}
-    </div> {% endcomment %}
 
-    {% comment %} <div>
-
-        <ul>
-            {% for task in task %}
-            <li>
-                <p>{{task.title}}</p>
-                <span>{{task.status}}</span>
-            </li>
-            
-            {% endfor %}
-
-        </ul>
-        
-    </div> {% endcomment %}
-
-    {% comment %} <div>
-
-        <ul>
-            {% for task in task %}
-            <li>
-                <p>{{task.title}}</p>
-                <span>{{task.status}}</span>
-            </li>
-            
-            {% endfor %}
-
-        </ul>
-        
-    </div> {% endcomment %}
-{% comment %} 
-
-    <div>
-        {{task}}
-    </div> {% endcomment %}
-
-    {% comment %} <div>
-        <ul>
-            {% for tasks in tasks  %}
-               <li>
-                <p>{{tasks.title}}</p>
-                <span>{{tasks.datils.priority}}</span>
-               </li>
-            {% endfor %}
-        </ul>
-    </div> {% endcomment %}
-
-     {% comment %} <div>
-        <ul>
-            {% for tasks in tasks  %}
-               <li>
-                <p>{{tasks.name}}</p>
-                {% for task in tasks.task_set.all %}
-                  <p>{{task.title}}</p>
-                
-                {% endfor %}
-              
-               </li>
-            {% endfor %}
-        </ul>
-    </div> {% endcomment %}
-
-    <div>
-        <p>{{ task_count}}</p>
-    </div>
-    
-    
 </body>
+
 </html>

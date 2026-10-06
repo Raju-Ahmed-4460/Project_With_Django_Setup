@@ -7,6 +7,7 @@ from django.db.models import Q,Max,Min,Count,Avg
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required,user_passes_test
 from users.views import is_admin
+from django.views.generic import ListView
 
 # Create your views here.
 
@@ -158,12 +159,25 @@ def delete_task(request,id):
     
 
 ## See all Task
-@login_required
-@permission_required('tasks.view_task',login_url="no_permission")
-def view_task(request):
-    task_count=Task.objects.aggregate(num_task=Count('id'))
+# @login_required
+# @permission_required('tasks.view_task',login_url="no_permission")
+# def view_task(request):
+#     task_count=Task.objects.aggregate(num_task=Count('id'))
 
-    return render(request,"show_task.html",{'task_count': task_count})
+#     return render(request,"show_task.html",{'task_count': task_count})
+
+
+class ViewTask(ListView):
+    model = Task
+    context_object_name = "tasks"
+    template_name = "show_task.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context["task_count"] = Task.objects.count()
+
+        return context
 
 
 
