@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required, permission_required,user_passes_test
 from users.views import is_admin
 from django.views.generic import ListView
+from django.views.generic import DetailView
 
 # Create your views here.
 
@@ -197,6 +198,9 @@ def tasks_details(request,task_id):
         return redirect('task_details',task.id)
 
     return render(request,"task_details.html",{'task':task,'status_choices':status_choices})
+
+
+# aikhane TaskDetailView o use kora jhai
 
 
 
