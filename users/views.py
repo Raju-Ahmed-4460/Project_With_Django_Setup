@@ -8,6 +8,7 @@ from django.http import HttpResponse
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.decorators import login_required, permission_required,user_passes_test
 from django.db.models import Prefetch
+from django.contrib.auth.views import LoginView
 
 
 # Create your views here.
@@ -53,6 +54,18 @@ def Login(request):
                 messages.error(request, "Invalid or inactive account")
 
     return render(request, "registration/login.html", {'form': form})
+
+
+class CustomLoginView(LoginView):
+    form_class=CustomLoginForm
+
+    def get_success_url(self):
+        next_url=self.request.GET.get("next")
+        if next_url:
+            return next_url
+        else:
+            return super().get_success_url()
+        
 
 @login_required
 def Log_out(request):
@@ -103,7 +116,7 @@ def assign_role(request,user_id):
     
 
     return render(request,"admin/assignrole.html",{'form':form})
-
+@login_required
 @user_passes_test(is_admin,login_url="no_permission")
 def create_group(request):
     form=CreateGroupForm()
