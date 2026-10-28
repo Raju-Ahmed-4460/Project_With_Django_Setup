@@ -1,6 +1,8 @@
 from django.urls import path
-from users.views import sign_up,Login,Log_out,Activate_user,CustomLoginView,Admin_dashboard,assign_role,create_group,group_data
+from users.views import ProfileView, sign_up,Login,Log_out,Activate_user,CustomLoginView,Admin_dashboard,assign_role,create_group,group_data
 from django.contrib.auth.views import LoginView
+
+
 urlpatterns = [
     path('sign-up/',sign_up,name='sign-up'),
     # path("login/",Login,name="login"),
@@ -10,7 +12,8 @@ urlpatterns = [
     path("admin_dashboard/",Admin_dashboard,name='admin_dashboard'),
     path("admin/<int:user_id>/assignrole/",assign_role,name='assignrole'),
     path("admin/create_group/",create_group,name='create_group'),
-    path("admin/group_data/",group_data,name="group_data")
+    path("admin/group_data/",group_data,name="group_data"),
+    path("profile/",ProfileView.as_view(template_name ="accounts/profile.html"))
 
     
 ]
