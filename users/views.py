@@ -1,14 +1,14 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User,Group
-from users.forms import RegisterForm,CustomRegistrationForm,CustomLoginForm,AssignRoleForm,CreateGroupForm
+from users.forms import RegisterForm,CustomRegistrationForm,CustomLoginForm,AssignRoleForm,CreateGroupForm,CustomPasswordChangeForm
 from django.contrib import messages
 from django.contrib.auth import login,authenticate,logout
 from django.http import HttpResponse
 from django.contrib.auth.tokens import default_token_generator
 from django.contrib.auth.decorators import login_required, permission_required,user_passes_test
 from django.db.models import Prefetch
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView,PasswordChangeView
 from django.views.generic import TemplateView
 
 
@@ -67,6 +67,13 @@ class CustomLoginView(LoginView):
             return next_url
         else:
             return super().get_success_url()
+
+
+
+class ChangePassword(PasswordChangeView):
+    template_name="accounts/password_change.html"
+    form_class=CustomPasswordChangeForm
+
         
 
 @login_required
