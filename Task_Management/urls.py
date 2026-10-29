@@ -29,8 +29,7 @@ urlpatterns = [
     path("tasks/",include("tasks.urls")),
     path("users/",include("users.urls")),
     path("home/",include("core.urls")),
-
-
+  
 ]+debug_toolbar_urls()
 
 

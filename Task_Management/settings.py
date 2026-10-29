@@ -156,4 +156,5 @@ FORNTEND_URL="http://127.0.0.1:8000"
 
 LOGIN_URL="/users/login/"
 LOGIN_REDIRECT_URL="/tasks/dashboard"
+LOGOUT_REDIRECT_URL = "/home/home/"
 
