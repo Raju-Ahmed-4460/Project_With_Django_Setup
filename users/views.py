@@ -167,6 +167,7 @@ class CustomPasswordResetView(PasswordResetView):
     form_class=CustomPasswordResetForm
     template_name="registration/reset_pass.html"
     success_url = reverse_lazy('login')
+    html_email_template_name = "registration/reset_email.html"
 
 
     def get_context_data(self, **kwargs):
