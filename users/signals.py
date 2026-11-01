@@ -5,6 +5,7 @@ from django.contrib.auth.models import User,Group
 from django.contrib.auth.tokens import default_token_generator
 from django.conf import settings
 from django.core.mail import send_mail
+from users.models import UserProfile
 
 
 @receiver(post_save,sender=User)
@@ -32,5 +33,14 @@ def assign_group(sender,created,instance,**kwargs):
         user_grup,created=Group.objects.get_or_create(name='User')
         instance.groups.add(user_grup)
         instance.save()
+
+
+
+@receiver(post_save,sender=User)
+def create_or_update_user_profile(sender,instance,created,**kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
+   
+
 
 
