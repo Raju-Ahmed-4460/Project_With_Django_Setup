@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
 
 # Create your models here.
 
@@ -33,7 +33,7 @@ class Task(models.Model):
 
     # assigned_to=models.ManyToManyField(Employee,related_name="task")
 
-    assigned_to=models.ManyToManyField(User,related_name="task")
+    assigned_to=models.ManyToManyField(settings.AUTH_USER_MODEL,related_name="task")
 
 
     title=models.CharField( max_length=150)

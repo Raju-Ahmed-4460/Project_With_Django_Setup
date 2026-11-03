@@ -1,11 +1,15 @@
 from django.db.models.signals import post_save,post_delete,pre_save,m2m_changed
 from django.dispatch import receiver
 from django.core.mail import send_mail
-from django.contrib.auth.models import User,Group
+from django.contrib.auth.models import Group
 from django.contrib.auth.tokens import default_token_generator
 from django.conf import settings
 from django.core.mail import send_mail
-from users.models import UserProfile
+# from users.models import UserProfile
+
+from django.contrib.auth import get_user_model
+
+User=get_user_model()
 
 
 @receiver(post_save,sender=User)
@@ -36,10 +40,10 @@ def assign_group(sender,created,instance,**kwargs):
 
 
 
-@receiver(post_save,sender=User)
-def create_or_update_user_profile(sender,instance,created,**kwargs):
-    if created:
-        UserProfile.objects.create(user=instance)
+# @receiver(post_save,sender=User)
+# def create_or_update_user_profile(sender,instance,created,**kwargs):
+#     if created:
+#         UserProfile.objects.create(user=instance)
    
 
 

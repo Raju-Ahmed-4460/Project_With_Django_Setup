@@ -1,4 +1,84 @@
 from django.contrib import admin
-from .models import UserProfile
+from users.models import CustomUser
+from django.contrib.auth.admin import UserAdmin
 
-admin.site.register(UserProfile)
+
+@admin.register(CustomUser)
+class CustomUserAdmin(UserAdmin):
+    model = CustomUser
+
+    fieldsets = (
+        (None, {
+            'fields': ('username', 'password')
+        }),
+
+        ('Personal Info', {
+            'fields': ('first_name', 'last_name', 'email', 'bio', 'profile_image')
+        }),
+
+        ('Permissions', {
+            'fields': (
+                'is_active',
+                'is_staff',
+                'is_superuser',
+                'groups',
+                'user_permissions'
+            )
+        }),
+
+        ('Important Dates', {
+            'fields': ('last_login', 'date_joined')
+        }),
+    )
+
+    readonly_fields = ('last_login', 'date_joined')
+
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': (
+                'username',
+                'password1',
+                'password2',
+            ),
+        }),
+
+        ('Personal Info', {
+            'fields': (
+                'first_name',
+                'last_name',
+                'email',
+                'bio',
+                'profile_image',
+            ),
+        }),
+
+        ('Permissions', {
+            'fields': (
+                'is_active',
+                'is_staff',
+                'is_superuser',
+                'groups',
+                'user_permissions',
+            ),
+        }),
+    )
+
+    list_display = (
+        'id',
+        'username',
+        'email',
+        'first_name',
+        'last_name',
+        'is_active',
+        'is_staff',
+        'is_superuser',
+        'date_joined',
+    )
+
+    search_fields = (
+        'username',
+        'email',
+        'first_name',
+        'last_name',
+    )
